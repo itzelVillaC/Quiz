@@ -1,0 +1,40 @@
+﻿@model  Examen.ViewModel.QuestionsChoiceViewModel
+@{
+    ViewBag.Title = "Examen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Examen</h2>
+
+@using (Html.BeginForm("QuizQuestion", "TakeQuiz"))
+{
+
+
+    @Html.HiddenFor(m => m.StudentQuizQuestionId)
+
+    <br />
+    <div class="modal-dialog container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>  @Model.QuestionText</h3>
+            </div>
+            <div class="modal-body">
+                @for (int i = 0; i < Model.Answers.Count; i++)
+                {
+                    @Html.HiddenFor(m => m.Answers[i].AnswerId)
+                    <div>
+                        <label class="btn btn-lg btn-primary btn-block">
+                            <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                            @Html.RadioButtonFor(r => r.SelectedAnswerId, Model.Answers[i].AnswerId) @Model.Answers[i].AnswerText
+                        </label><br />
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-lg-6"><button type="submit" class="btn btn-success btn-block">SIGUIENTE</button> </div>
+                    <div class="col-lg-6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

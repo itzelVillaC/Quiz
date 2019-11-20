@@ -1,0 +1,11 @@
+﻿@model Examen.Models.StudentQuiz
+
+@{
+    ViewBag.Title = "QuizResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Final Score  <br />  @Model.FinalScore  % </h1>
+<br />
+<h4>Start time @Model.StartTime</h4>
+<h4>End Time @Model.EndTime</h4>

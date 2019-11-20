@@ -1,0 +1,31 @@
+﻿@model Examen.ViewModel.QuizListViewModel
+
+@{
+    ViewBag.Title = "DeleteQuiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Quiz</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Quiz Information</h4>
+    <hr />
+
+    @using (Html.BeginForm("DeleteQuiz", "Quiz"))
+    {
+        @Html.AntiForgeryToken()
+        <h3>
+            @Html.HiddenFor(model => model.QuizId)
+            @Html.DisplayNameFor(model => model.QuizName) <b> @Model.QuizName</b>
+        </h3>
+        <h3>
+            @Html.DisplayNameFor(model => model.QuizCode) <b>@Model.QuizCode</b>
+        </h3>
+        <div class="form-actions no-color">
+            <button type="submit" class="btn btn-default"> Delete</button>  |
+            @Html.ActionLink("Back to List", "ListQuizes")
+        </div>
+    }
+</div>
+

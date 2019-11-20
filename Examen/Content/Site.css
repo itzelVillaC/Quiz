@@ -1,0 +1,95 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color:aliceblue;
+}
+
+
+.navbar-inverse {
+    background-color: #262f9b;
+     border-color: white;
+}
+    .navbar-inverse .navbar-brand {
+        color: white;
+        font-size:30px;
+        font-family: sans-serif;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: white;
+        font-size:18px;
+        font-family: sans-serif;
+    }
+
+    .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+        color: #ffffff;
+        background-color: darkblue;
+    }
+.dropdown-menu {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*style for question*/
+label.btn {
+    padding: 18px 60px;
+    white-space: normal;
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -webkit-transition-duration: .3s;
+    -moz-transition-duration: .3s;
+    -o-transition-duration: .3s
+}
+
+    label.btn:hover {
+        text-shadow: 0 3px 2px rgba(0,0,0,0.4);
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1)
+    }
+
+label.btn-block {
+    text-align: left;
+    position: relative
+}
+
+label .btn-label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: inline-block;
+    padding: 0 10px;
+    background: rgba(0,0,0,.15);
+    height: 100%
+}
+
+label .glyphicon {
+    top: 34%
+}

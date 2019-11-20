@@ -1,0 +1,121 @@
+﻿@model Examen.ViewModel.QuizInformationViewModel
+@{
+    ViewBag.Title = "CreateQuestion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="add">
+    @using (Html.BeginForm("CreateQuestion", "Quiz"))
+    {
+        @Html.HiddenFor(m => m.QuizId)
+
+        <h2>@Model.QuizName</h2> <br />
+
+        <div class="modal-content">
+            <div class="modal-body">
+                @foreach (var question in Model.Questions)
+                {
+                    <div>
+                        @question.QuestionText
+                        <br />
+                        @foreach (var answer in question.Answers)
+                        {
+                            <div>
+                                @Html.RadioButtonFor(r => r.SelectedCorrectAnswer, @answer.AnswerId) @answer.AnswerText
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                }
+            </div>
+        </div>
+        <br />
+
+        <button type="button" class="btn btn-warning  btn-lg " data-toggle="modal" data-target="#exampleModalCenter">
+            ADD  QUESTION TO QUIZ
+        </button>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Question</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @Html.LabelFor(m => m.QuestionText)
+                        @Html.TextAreaFor(m => m.QuestionText, new { @class = "form-control" })
+                        <br />
+                        <input id="btnAdd" type="button" class="form-control btn-success " value="Add Answer" onclick="AddTextBox()" />
+                        <br />
+                        <div id="TextBoxContainer">
+                            <!--Textboxes will be added here -->
+                            <div>
+                                <input name="DynamicTextBox" type="text" class="form-control" placeholder="Correct Answer" /> Correct Answer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success btn-lg pull-right " onclick="DoneClick();">DONE</button>
+
+    }
+</div>
+<div id="done" style="display:none;">
+    <h1>@Model.QuizName</h1>
+    <h1 class="alert alert-success text-center">QUIZ CODE: @Model.QuizCode</h1>
+    <div class="alert alert-info " role="alert">
+        The students would need the quiz code to start the test
+    </div>
+    <a href="/" class="btn btn-success btn-lg pull-right ">DONE</a>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+                function DoneClick() {
+                    $('#add').hide();
+                    $('#done').show();
+                }
+
+        function GetDynamicTextBox(value) {
+            var div = $("<div /><br>");
+
+            var textBox = $("<input />").attr("type", "textbox").attr("name", "DynamicTextBox");
+            textBox.addClass("form-control ");
+            textBox.val(value);
+            div.append(textBox);
+
+            var button = $("<input />").attr("type", "button").attr("value", "REMOVE");
+            button.addClass(" btn-sm btn-warning ");
+            button.attr("onclick", "RemoveTextBox(this)");
+            div.append(button);
+
+            return div;
+        }
+        function AddTextBox() {
+            var div = GetDynamicTextBox("");
+            $("#TextBoxContainer").append(div);
+        }
+
+        function RemoveTextBox(button) {
+            $(button).parent().remove();
+        }
+
+        $(function () {
+            var values = eval('@Html.Raw(ViewBag.Values)');
+            if (values != null) {
+                $("#TextBoxContainer").html("");
+                $(values).each(function () {
+                    $("#TextBoxContainer").append(GetDynamicTextBox(this));
+                });
+            }
+        });
+    </script>
+}

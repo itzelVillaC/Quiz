@@ -1,0 +1,51 @@
+﻿@model List<Examen.ViewModel.CourseListViewModel>
+
+@{
+    ViewBag.Title = "ListQuizes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>My List </h2>
+<div class="alert alert-info">
+    <strong>INFO!</strong> FOR SPECIFIC INFORMATION OF A  QUIZ,CLICK IN THE COURSE DETAILS.
+</div>
+<br />
+
+@{ int i = 0;}
+
+@foreach (var item in Model)
+{
+    <div class="panel-group" id="accordion_@i">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a data-toggle="collapse" data-parent="#accordion_@i" href="#collapseGroup_@i">
+                    <h4 class="panel-title">
+                        @Html.HiddenFor(modelItem => item.CourseId) @Html.DisplayFor(modelItem => item.CourseName)
+                        <span class="pull-right">Details<span class="caret"></span></span>
+                    </h4>
+                </a>
+            </div>
+            <div id="collapseGroup_@i" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th> Quiz Name </th>
+                            <th>Quiz Code </th>
+                            <th class="text-right">Actions</th>
+                        </tr>
+                        @foreach (var q in item.Quiz)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => q.QuizName)</td>
+                                <td>@Html.DisplayFor(modelItem => q.QuizCode)</td>
+                                <td class="text-right"> @Html.ActionLink("Preview", "CreateQuestion", new { id = q.QuizId }) | @Html.ActionLink("Edit", "Edit", new { id = q.QuizId }) | @Html.ActionLink("Delete", "DeleteQuiz", new { id = q.QuizId })</td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    i++;
+}
